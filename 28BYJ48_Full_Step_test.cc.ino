@@ -1,14 +1,15 @@
-#define STEPPER_OUT1 7
-#define STEPPER_OUT2 2
-#define STEPPER_OUT3 3
-#define STEPPER_OUT4 4
-#define ENCODER_KNOB 9
-#define ENCODER_A 5
-#define ENCODER_B 6
+#define STEPPER_OUT1 2
+#define STEPPER_OUT2 3
+#define STEPPER_OUT3 4
+#define STEPPER_OUT4 5
+#define ENCODER_KNOB 8
+#define ENCODER_A 6
+#define ENCODER_B 7
 
-#define STEPPER_PERIOD 3 //msec
-#define ENCODER_PERIOD 7 //msec
+#define STEPPER_PERIOD 5 //msec
+#define ENCODER_PERIOD 10//msec
 #define KNOB_PERIOD 20 //msec 
+
 const bool PHASES_LAYOUT[4][4] = {
   {1,0,0,1},
   {1,1,0,0},
@@ -17,7 +18,7 @@ const bool PHASES_LAYOUT[4][4] = {
 };
  //msec
 unsigned long stepper_timer_ref, current_stepper_timer;
-int stepper_destination; //steps relative to current position
+int stepper_destination; //steps relative to current position, 2048 steps = 1 turn
 int8_t phase = 0;
 
 unsigned long encoder_timer_ref;
@@ -35,7 +36,7 @@ void setup() {
   pinMode(ENCODER_A, INPUT_PULLUP);
   pinMode(ENCODER_B, INPUT_PULLUP);
   stepper_timer_ref = millis();
-  stepper_destination = 5000;
+  stepper_destination = 0;
   
   encoder_timer_ref = millis();
   knob_pressed = false;
